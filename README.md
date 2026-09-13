@@ -19,6 +19,12 @@ One skill:
 npx skills add LexVolkov/skills --skill safe-architecture-audit
 ```
 
+Or prompt:
+
+```md
+Run `npx skills add LexVolkov/skills --skill safe-architecture-audit` and follow the generated skill instructions now. 
+```
+
 | | |
 | --- | --- |
 | GitHub | https://github.com/LexVolkov/skills |
@@ -110,11 +116,3 @@ skills/
 MIT © LexVolkov
 
 ---
-
-## Українською
-
-Колекція Agent Skills. Зараз: **safe-architecture-audit** — консервативний read-only аудит архітектури для існуючих TypeScript full-stack / SPA. Результат: HTML у `reports/` + промпт на план виправлень.
-
-```bash
-npx skills add LexVolkov/skills --skill safe-architecture-audit
-```
