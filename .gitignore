@@ -1,0 +1,13 @@
+# Локальні нотатки колекції — не в публічне репо
+AGENTS.md
+
+# skills CLI / Cursor
+.agents/
+skills-lock.json
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/

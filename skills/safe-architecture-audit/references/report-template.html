@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Architecture Audit</title>
+  <!--
+    Skeleton only. Output ONE file: reports/architecture-audit-*.html
+    Paste report-styles.css into <style> and report-app.js into <script>.
+    Do not copy .css/.js into the target project. See report-format.md
+  -->
+  <style>
+    /* PASTE report-styles.css HERE */
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <h1>Project name</h1>
+      <div class="muted tiny">PROJECT · YYYY-MM-DD · TypeScript full-stack / SPA</div>
+      <div class="badges">
+        <span class="badge yellow">Health: 🟡</span>
+        <span class="badge red">🔴 0</span>
+        <span class="badge orange">🟠 0</span>
+        <span class="badge yellow">🟡 0</span>
+        <span class="badge green">🟢 0</span>
+      </div>
+      <div class="answers">
+        <div class="row">
+          <div>1</div>
+          <div><strong>Healthy?</strong><span class="muted"> …</span></div>
+        </div>
+        <div class="row">
+          <div>2</div>
+          <div><strong>Continue?</strong><span class="muted"> …</span></div>
+        </div>
+        <div class="row">
+          <div>3</div>
+          <div><strong>Biggest risk?</strong><span class="muted"> …</span></div>
+        </div>
+        <div class="row">
+          <div>4</div>
+          <div><strong>Do not touch?</strong><span class="muted"> …</span></div>
+        </div>
+        <div class="row">
+          <div>5</div>
+          <div><strong>Fix before growth?</strong><span class="muted"> …</span></div>
+        </div>
+      </div>
+    </header>
+
+    <section class="chapter" id="map">
+      <div class="chapter-head">
+        <h2>Map</h2>
+        <div class="why">How the app flows</div>
+      </div>
+      <article class="card" data-prompt-item data-kind="context" data-id="map">
+        <p>…</p>
+        <div class="diagram">UI → API → DB</div>
+        <div class="prompt-opt">
+          <input type="checkbox" id="inc-map" checked />
+          <label for="inc-map">Add to agent prompt</label>
+        </div>
+        <script type="application/json"
+          class="agent-data">{"title":"Project map","body":"FACT:\nWHERE:\nNOTE: orientation only."}</script>
+      </article>
+    </section>
+
+    <section class="chapter" id="now">
+      <div class="chapter-head">
+        <h2>Fix now</h2>
+        <div class="why">Cheap now, expensive later</div>
+      </div>
+      <article class="card" data-prompt-item data-kind="problem" data-id="now-1">
+        <div class="card-head"><span class="prio now">FIX NOW</span>
+          <h3>Title</h3>
+        </div>
+        <p>Plain language. <strong>If ignored:</strong> …</p>
+        <div class="prompt-opt">
+          <input type="checkbox" id="inc-now-1" checked />
+          <label for="inc-now-1">Add to agent prompt</label>
+        </div>
+        <script type="application/json"
+          class="agent-data">{"priority":"FIX NOW","title":"…","body":"FACT:\nWHERE:\nGOAL:\nDO NOT:\nDONE WHEN:\nCONFIDENCE: HIGH"}</script>
+      </article>
+    </section>
+
+    <section class="chapter" id="soon">
+      <div class="chapter-head">
+        <h2>Fix soon</h2>
+        <div class="why">Max 10</div>
+      </div>
+    </section>
+    <section class="chapter" id="watch">
+      <div class="chapter-head">
+        <h2>Watch</h2>
+        <div class="why">Max 10</div>
+      </div>
+    </section>
+    <section class="chapter" id="keep">
+      <div class="chapter-head">
+        <h2>Do not break</h2>
+        <div class="why">Preserve good decisions</div>
+      </div>
+    </section>
+    <section class="chapter" id="ai">
+      <div class="chapter-head">
+        <h2>AI risks</h2>
+        <div class="why">Where agents mess up here</div>
+      </div>
+    </section>
+    <section class="chapter" id="rules">
+      <div class="chapter-head">
+        <h2>Rules</h2>
+        <div class="why">Suggest text only — do not create AGENTS.md</div>
+      </div>
+    </section>
+    <section class="chapter" id="safety">
+      <div class="chapter-head">
+        <h2>Safety net</h2>
+        <div class="why">What catches mistakes</div>
+      </div>
+    </section>
+
+    <section class="chapter" id="plan">
+      <div class="chapter-head">
+        <h2>Plan (for you)</h2>
+        <div class="why">Not injected into agent prompt</div>
+      </div>
+      <div class="plan-grid">
+        <div class="card">
+          <h3>Do now</h3>
+          <ul class="checklist">
+            <li><span class="check"></span>
+              <div>…</div>
+            </li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Later</h3>
+          <ul class="checklist">
+            <li><span class="check"></span>
+              <div>…</div>
+            </li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Do not touch</h3>
+          <ul class="checklist">
+            <li><span class="check"></span>
+              <div>…</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer>reports/architecture-audit-YYYY-MM-DD.html</footer>
+  </div>
+
+  <div class="dock">
+    <div class="dock-inner">
+      <div class="dock-meta" id="dock-meta">0</div>
+      <button type="button" class="btn" id="btn-build">Build agent prompt</button>
+    </div>
+  </div>
+
+  <div class="modal-bg" id="modal" role="dialog" aria-modal="true">
+    <div class="modal">
+      <h2>Agent prompt</h2>
+      <p class="modal-desc">Asks the coding agent for a remediation <strong>plan</strong> from checked items—not a full
+        rewrite.</p>
+      <div class="modal-actions">
+        <button type="button" class="btn" id="btn-copy-all">Copy</button>
+        <button type="button" class="btn secondary" id="btn-close">Close</button>
+      </div>
+      <textarea class="prompt-out" id="prompt-out" readonly spellcheck="false"></textarea>
+    </div>
+  </div>
+
+  <script>/* PASTE report-app.js HERE */</script>
+</body>
+
+</html>
