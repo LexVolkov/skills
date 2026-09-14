@@ -47,7 +47,7 @@ Explicitly invoke (does not auto-trigger):
 Use grill-me-softly
 ```
 
-Inspired by [mattpocock/grill-me](https://github.com/mattpocock/skills) (MIT); self-contained — no separate grilling skill required.
+Inspired by [mattpocock/grill-me](https://github.com/mattpocock/skills) (MIT). Requires the `grilling` skill (e.g. from `mattpocock/skills`).
 
 ---
 

@@ -1,17 +1,13 @@
 ---
 name: grill-me-softly
 description: >-
-  Soft grilling: interview only high-stakes product or architecture decisions
-  that are expensive to reverse later. Skips look-uppable facts, conventions,
-  and low-stakes polish. Use when the user asks grill-me-softly, soft grill,
-  or wants grilling without low-stakes noise and without jargon they did not use.
+  Soft grilling: only expensive-to-reverse product/architecture decisions,
+  plain language. Use for grill-me-softly or soft grill.
 license: MIT
 disable-model-invocation: true
 ---
 
-# Grill Me Softly
-
-Interview until expensive-to-reverse decisions are settled. Self-contained — do not call a separate grilling skill.
+Call the Skill tool with "grilling", then follow **these overlays** (they win over grilling defaults when they conflict).
 
 ## Filter
 
@@ -37,25 +33,12 @@ Test: *If we pick wrong or skip this and build for a month, how expensive is the
 
 ## Round
 
-Format:
-
-```
-❓ **Q1** - **<title>**: <body; options if useful>
-
-➡️ <recommended answer>
-
----
-```
+Same Q/➡️ format as grilling, but:
 
 - Prefer **1–3 questions per round**. Highest-cost blockers first.
-- Facts are your job: look them up; never ask what you can find.
 - After each round, one short line of what you **already decided yourself** (cheap / look-uppable) so the user can object — do not interrogate those.
-- Wait for answers before the next round.
 
 ## Done
 
 When no expensive-to-reverse decisions remain open, summarize: locked foundations, deferred cheap items, key rules.
 
-Do not implement until the user confirms.
-
-Inspired by [mattpocock/grill-me](https://github.com/mattpocock/skills) (MIT).
