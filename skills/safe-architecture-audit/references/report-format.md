@@ -60,13 +60,24 @@ Evidence or drop. FACT ≠ OPINION. Fix smaller than the problem.
 
 ## CHAT RESPONSE
 
-User’s language, ≤ ~200 words:
+User’s language, ≤ ~500 words:
 
 ```text
 Audit completed.
-Overall health: 🟢/🟡/🟠/🔴
 Findings: 🔴 X · 🟠 X · 🟡 X · 🟢 X
+Report: reports/architecture-audit-YYYY-MM-DD.html
+
+---
+
+### Summary
+
+Do now:
+- ...
+Do later:
+- ...
+Do not touch:
+- ...
+
 Most important finding: …
 Most important recommendation: …
-Report: reports/architecture-audit-YYYY-MM-DD.html
 ```

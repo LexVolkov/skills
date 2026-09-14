@@ -83,4 +83,4 @@ Then read and follow:
 
 # AFTER THE REPORT
 
-Chat only (user’s language, ≤ ~200 words)—see **CHAT RESPONSE** in report-format. Do not paste the HTML into chat.
+Chat only (user’s language, ≤ ~500 words)—see **CHAT RESPONSE** in report-format. Do not paste the HTML into chat.
