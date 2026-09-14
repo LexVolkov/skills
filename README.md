@@ -17,12 +17,13 @@ One skill:
 
 ```bash
 npx skills add LexVolkov/skills --skill safe-architecture-audit
+npx skills add LexVolkov/skills --skill grill-me-softly
 ```
 
 Or prompt:
 
 ```md
-Run `npx skills add LexVolkov/skills --skill safe-architecture-audit` and follow the generated skill instructions now. 
+Run `npx skills add LexVolkov/skills --skill grill-me-softly` and follow the generated skill instructions now.
 ```
 
 | | |
@@ -33,6 +34,22 @@ Run `npx skills add LexVolkov/skills --skill safe-architecture-audit` and follow
 ---
 
 ## Skills
+
+### grill-me-softly
+
+**Soft grilling: only decisions that are expensive to reverse.**
+
+Interviews you on high-stakes product/architecture forks — data model, permissions, system boundaries, irreversible rules, public contracts. Skips look-uppable facts, existing conventions, and low-stakes polish. Plain language; 1–3 questions per round.
+
+Explicitly invoke (does not auto-trigger):
+
+```text
+Use grill-me-softly
+```
+
+Inspired by [mattpocock/grill-me](https://github.com/mattpocock/skills) (MIT); self-contained — no separate grilling skill required.
+
+---
 
 ### safe-architecture-audit
 
@@ -104,6 +121,9 @@ Focus: client ↔ server boundaries · typed contracts · duplicate sources of t
 
 ```text
 skills/
+├── grill-me-softly/
+│   ├── SKILL.md
+│   └── agents/
 └── safe-architecture-audit/
     ├── SKILL.md
     └── references/

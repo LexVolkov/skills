@@ -1,0 +1,5 @@
+interface:
+  display_name: "Grill Me Softly"
+  short_description: "Only expensive-to-reverse decisions, plain language"
+policy:
+  allow_implicit_invocation: false
