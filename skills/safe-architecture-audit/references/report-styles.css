@@ -136,6 +136,10 @@ section.chapter {
 
 .chapter-head {
   margin-bottom: 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg2);
 }
 
 .chapter-head h2 {
@@ -147,6 +151,38 @@ section.chapter {
   color: var(--muted);
   font-size: 14px;
   margin-top: 4px;
+}
+
+#now .chapter-head {
+  color: var(--red);
+  border-color: #6a2b2b;
+  background: #2a1518;
+}
+
+#soon .chapter-head {
+  color: var(--orange);
+  border-color: #6a4520;
+  background: #2a1d12;
+}
+
+#watch .chapter-head {
+  color: var(--yellow);
+  border-color: #6a5a18;
+  background: #2a2612;
+}
+
+#keep .chapter-head {
+  color: var(--green);
+  border-color: #2b5a38;
+  background: #132418;
+}
+
+#now .chapter-head .why,
+#soon .chapter-head .why,
+#watch .chapter-head .why,
+#keep .chapter-head .why {
+  color: inherit;
+  opacity: .75;
 }
 
 .card {
