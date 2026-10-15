@@ -19,10 +19,12 @@ Book, Turn (fragment), Charter, Lore card, Master (owner). Do not rename them.
 ## Read first
 
 1. `list_my_books` — which books, whose turn.
-2. `get_book` — status, queue, deadline, chapters (`storyId`).
-3. Before writing: `read_charter`, `list_chapters`, `list_turns` (`limit` string 1–50; each line has `turnId`), `list_lore` / `get_lore`.
+2. `get_book` — status, queue, `allowEdit`, chapters (`storyId`). Note your uid.
+3. `list_members` — map `authorUid` → handle/displayName/role (and who is «ви»).
+4. Before writing: `read_charter`, `list_chapters`, `list_turns` (`limit` string 1–50; each line has `turnId`), `list_lore` / `get_lore`.
    - `list_chapters` — title, closed/open, fragment range (`fromOrder < order ≤ toOrder`). Then `list_turns` with `afterOrder=<fromOrder>`.
    - Default `list_turns` = newest tail only. Full book: `afterOrder=0`, then keep calling with `afterOrder=<last order>` until a short page.
+   - Each turn line: `· ви` = authored by the signed-in user; `· editable` = `edit_turn` allowed now; `· read-only` = do not edit.
    - `list_lore`: optional `type` (`character` | `location` | `artifact` | `term` | `note`); `afterOrder=0` then page with `afterOrder=<last #>` (sorted by createdAt).
 
 Match the Charter. Do not contradict recent turns or lore the user can see.
@@ -46,7 +48,7 @@ Before `update_charter`, call `charter_schema`. Send only those field ids and op
 ## Who may write
 
 - `submit_turn` — only when it is this user’s turn (`get_book`). Server still enforces rules.
-- `edit_turn` — author of that turn when the book allows edits, or staff/admin. If the server says not allowed, stop.
+- `edit_turn` — only turns marked `editable` in `list_turns` (author + `allowEdit`, or staff/admin; closed-chapter turns are read-only unless platform admin). If the server says not allowed, stop.
 - `add_lore` — a member of the book, within the lore quota.
 - `update_charter` — Master only. It saves the wizard and publishes a new Charter version.
 - `create_book` — creates a **draft**. The queue starts only after the first Charter publish via `update_charter`.
