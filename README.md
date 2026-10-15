@@ -18,6 +18,7 @@ One skill:
 ```bash
 npx skills add LexVolkov/skills --skill safe-architecture-audit
 npx skills add LexVolkov/skills --skill grill-me-softly
+npx skills add LexVolkov/skills --skill spilnaknyha-mcp
 ```
 
 Or prompt:
@@ -34,6 +35,22 @@ Run `npx skills add LexVolkov/skills --skill grill-me-softly` and follow the gen
 ---
 
 ## Skills
+
+### spilnaknyha-mcp
+
+**Write and read Spilna Knyha via the public MCP** (books, turns, Charter, lore).
+
+Teaches the agent the remote endpoint `…/api/mcp/http`, tool order, `confirm: true` only after explicit consent, Master-only Charter updates, and draft books until first Charter publish.
+
+Install:
+
+```bash
+npx skills add LexVolkov/skills --skill spilnaknyha-mcp
+```
+
+Site: [spilnaknyha.pp.ua/mcp](https://spilnaknyha.pp.ua/mcp)
+
+---
 
 ### grill-me-softly
 
@@ -124,9 +141,11 @@ skills/
 ├── grill-me-softly/
 │   ├── SKILL.md
 │   └── agents/
-└── safe-architecture-audit/
-    ├── SKILL.md
-    └── references/
+├── safe-architecture-audit/
+│   ├── SKILL.md
+│   └── references/
+└── spilnaknyha-mcp/
+    └── SKILL.md
 ```
 
 ---
