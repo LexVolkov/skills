@@ -22,6 +22,7 @@ Book, Turn (fragment), Charter, Lore card, Master (owner). Do not rename them.
 2. `get_book` — status, queue, deadline, chapters (`storyId`).
 3. Before writing: `read_charter`, `list_turns` (`limit` string 1–50; each line has `turnId`), `list_lore` / `get_lore`.
    - Default `list_turns` = newest tail only. Full book: `afterOrder=0`, then keep calling with `afterOrder=<last order>` until a short page.
+   - `list_lore`: optional `type` (`character` | `location` | `artifact` | `term` | `note`); `afterOrder=0` then page with `afterOrder=<last #>` (sorted by createdAt).
 
 Match the Charter. Do not contradict recent turns or lore the user can see.
 
