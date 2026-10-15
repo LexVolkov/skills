@@ -21,6 +21,7 @@ Book, Turn (fragment), Charter, Lore card, Master (owner). Do not rename them.
 1. `list_my_books` — which books, whose turn.
 2. `get_book` — status, queue, `allowEdit`, chapters (`storyId`). Note your uid.
 3. `list_members` — map `authorUid` → handle/displayName/role (and who is «ви»).
+   Roles (book hierarchy): author → editor → manager → deputy → master (Owner).
 4. Before writing: `read_charter`, `list_chapters`, `list_turns` (`limit` string 1–50; each line has `turnId`), `list_lore` / `get_lore`.
    - `list_chapters` — title, closed/open, fragment range (`fromOrder < order ≤ toOrder`). Then `list_turns` with `afterOrder=<fromOrder>`.
    - Default `list_turns` = newest tail only. Full book: `afterOrder=0`, then keep calling with `afterOrder=<last order>` until a short page.
