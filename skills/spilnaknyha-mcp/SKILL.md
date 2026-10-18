@@ -20,9 +20,9 @@ Book, Turn (fragment), Chapter, Charter, Lore card.
 Roles (book hierarchy, not platform admin): **Author** → **Editor** → **Manager** → **Deputy** → **Master**.
 Codes: `author` | `editor` | `manager` | `deputy` | `master`. Master = book owner. Do not rename them.
 
-## Tools (15)
+## Tools (16)
 
-Read: `list_my_books`, `get_book`, `list_members`, `read_charter`, `list_chapters`, `charter_schema`, `list_turns`, `list_lore`, `get_lore`.
+Read: `list_my_books`, `get_book`, `list_members`, `read_charter`, `list_chapters`, `charter_schema`, `list_turns`, `get_turns`, `list_lore`, `get_lore`.
 Write (need confirm): `submit_turn`, `edit_turn`, `add_lore`, `update_charter`, `create_book`.
 Session: `logout`.
 
@@ -31,17 +31,24 @@ Session: `logout`.
 1. `list_my_books` — which books, whose turn.
 2. `get_book` — status, queue, your uid, `allowEdit`, `lastClosedTurnOrder`, turn/chapter counts.
 3. `list_members` — map `authorUid` → `@handle`, displayName, **role**, muted/banned/shadow, turnCount, «ви».
-4. Before writing: `read_charter`, `list_chapters`, `list_turns`, `list_lore` / `get_lore`.
+4. Before writing: `read_charter`, `list_chapters`, `list_turns` (index) + `get_turns` (text), `list_lore` / `get_lore`.
 
 ### Chapters
 
 `list_chapters` — title, `closed`/`open`, fragment range: `fromOrder < order ≤ toOrder`.
-Then load text with `list_turns` and `afterOrder=<fromOrder>` (stop when order > toOrder).
+Then load text with `get_turns`: `fromOrder=<fromOrder+1>` and `toOrder=<toOrder>` (or `orders`).
 
 ### Turns
 
-- Default = newest **tail**. Full book: `afterOrder=0`, then `afterOrder=<last order>` until a short page (`limit` string 1–50).
-- Each line has `turnId`, `authorUid`, `· ви` (yours), `· editable` or `· read-only`.
+- **`list_turns`** — index only: `#order`, `turnId`, `authorUid`, `· ви`, `· editable` / `· read-only`, **N символів**. No body text.
+- **`get_turns`** — full text. Need at least one selector (union if several). Max **100** fragments per call.
+  - `turnId` / `turnIds` (comma-separated)
+  - `order` / `orders` — list or ranges: `24,25` or `24-26,30`
+  - `fromOrder` + `toOrder` — inclusive range
+  - `afterOrder` + `limit` — page forward (`order > afterOrder`)
+  - `beforeOrder` + `limit` — page backward (`order < beforeOrder`)
+  - Missing ids/orders are listed as `не знайдено: …`; found turns still return.
+- Default `list_turns` = newest **tail**. Full book index: `afterOrder=0`, then `afterOrder=<last order>` until a short page (`limit` string 1–50).
 - Resolve names via `list_members`. Never invent handles.
 
 ### Lore
