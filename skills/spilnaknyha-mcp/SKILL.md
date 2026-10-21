@@ -56,10 +56,10 @@ Then load text with `get_turns`: `fromOrder=<fromOrder+1>` and `toOrder=<toOrder
 
 If `get_book` shows `Challenge mode: on` and it is your turn, every turn except the book's first needs one challenge card.
 
-1. Call `get_challenge` **first**, before writing. It returns your 3 dealt cards (`cardId`, title, explanation, `Fulfilled when`), or the card already chosen. The deal is personal and stays the same across skips.
+1. Call `get_challenge` **first**, before writing. It returns your 3 dealt cards (`cardId`, title, explanation), or the card already chosen. The deal is personal and stays the same across skips.
 2. If no card is chosen: show the user all dealt cards and **ask which one they pick**. Choose yourself only if the user explicitly asks you to.
 3. `choose_challenge` with that `cardId`: preview first, then `confirm: true` after the user agrees. The choice is final.
-4. Write a fragment that honestly fulfils the card (see `Fulfilled when`), organically. Never name the card or comment on it in the text.
+4. Write a fragment that honestly fulfils the card, organically. Never name the card or comment on it in the text.
 5. `submit_turn` preview shows the chosen card; `challenge_required` means no card is chosen yet — go back to step 1.
 
 There is no hint in MCP: the site's "book-context hint" is not available here and cannot be generated.
