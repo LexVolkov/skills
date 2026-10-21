@@ -20,10 +20,11 @@ Book, Turn (fragment), Chapter, Charter, Lore card.
 Roles (book hierarchy, not platform admin): **Author** → **Editor** → **Manager** → **Deputy** → **Master**.
 Codes: `author` | `editor` | `manager` | `deputy` | `master`. Master = book owner. Do not rename them.
 
-## Tools (16)
+## Tools (18)
 
 Read: `list_my_books`, `get_book`, `list_members`, `read_charter`, `list_chapters`, `charter_schema`, `list_turns`, `get_turns`, `list_lore`, `get_lore`.
 Write (need confirm): `submit_turn`, `edit_turn`, `add_lore`, `update_charter`, `create_book`.
+Challenge mode: `get_challenge`, `choose_challenge` (needs confirm).
 Session: `logout`.
 
 ## Read first
@@ -40,7 +41,7 @@ Then load text with `get_turns`: `fromOrder=<fromOrder+1>` and `toOrder=<toOrder
 
 ### Turns
 
-- **`list_turns`** — index only: `#order`, `turnId`, `authorUid`, `· ви`, `· editable` / `· read-only`, **N символів**. No body text.
+- **`list_turns`** — index only: `#order`, `turnId`, `authorUid`, `· ви`, `· editable` / `· read-only`, **N символів**; in challenge mode also `· challenge: <title>` and a `Challenge: <explanation>` line. No body text.
 - **`get_turns`** — full text. Need at least one selector (union if several). Max **100** fragments per call.
   - `turnId` / `turnIds` (comma-separated)
   - `order` / `orders` — list or ranges: `24,25` or `24-26,30`
@@ -50,6 +51,18 @@ Then load text with `get_turns`: `fromOrder=<fromOrder+1>` and `toOrder=<toOrder
   - Missing ids/orders are listed as `не знайдено: …`; found turns still return.
 - Default `list_turns` = newest **tail**. Full book index: `afterOrder=0`, then `afterOrder=<last order>` until a short page (`limit` string 1–50).
 - Resolve names via `list_members`. Never invent handles.
+
+### Challenge mode
+
+If `get_book` shows `Challenge mode: on` and it is your turn, every turn except the book's first needs one challenge card.
+
+1. Call `get_challenge` **first**, before writing. It returns your 3 dealt cards (`cardId`, title, explanation, `Fulfilled when`), or the card already chosen. The deal is personal and stays the same across skips.
+2. If no card is chosen: show the user all dealt cards and **ask which one they pick**. Choose yourself only if the user explicitly asks you to.
+3. `choose_challenge` with that `cardId`: preview first, then `confirm: true` after the user agrees. The choice is final.
+4. Write a fragment that honestly fulfils the card (see `Fulfilled when`), organically. Never name the card or comment on it in the text.
+5. `submit_turn` preview shows the chosen card; `challenge_required` means no card is chosen yet — go back to step 1.
+
+There is no hint in MCP: the site's "book-context hint" is not available here and cannot be generated.
 
 ### Lore
 
@@ -75,7 +88,8 @@ Before `update_charter`, call `charter_schema`. Send only those field ids/option
 
 ## Who may write
 
-- `submit_turn` — only on this user’s turn (`get_book`). Server enforces rules.
+- `submit_turn` — only on this user’s turn (`get_book`). Server enforces rules. In challenge mode a chosen card is required (`get_challenge` → `choose_challenge`).
+- `get_challenge` / `choose_challenge` — only on this user’s own turn in a challenge-mode book.
 - `edit_turn` — only `editable` turns (own + `allowEdit`, or Manager/Deputy/Master staff rules; closed-chapter fragments are read-only unless platform admin).
 - `add_lore` — book member, within lore quota.
 - `update_charter` — **Master** only (wizard save + publish).
@@ -83,5 +97,5 @@ Before `update_charter`, call `charter_schema`. Send only those field ids/option
 
 ## Not in MCP
 
-No turn digest, no chapter summaries, no edit/delete lore, no invites, no pause.
+No turn digest, no chapter summaries, no edit/delete lore, no invites, no pause, no challenge hint (book-context suggestion).
 If asked, say the tool is not on MCP and use the website.
