@@ -30,9 +30,20 @@ Session: `logout`.
 ## Read first
 
 1. `list_my_books` — which books, whose turn.
-2. `get_book` — status, queue, your uid, `allowEdit`, `lastClosedTurnOrder`, turn/chapter counts.
+2. `get_book` — status, queue, your uid, `allowEdit`, `lastClosedTurnOrder`, turn/chapter counts, challenge mode. **Not** charter cover (title/description/genre/lang/visibility) — that is `read_charter` → `meta`.
 3. `list_members` — map `authorUid` → `@handle`, displayName, **role**, muted/banned/shadow, turnCount, «ви».
 4. Before writing: `read_charter`, `list_chapters`, `list_turns` (index) + `get_turns` (text), `list_lore` / `get_lore`.
+
+### Charter
+
+- `charter_schema` — field registry: each id has `store=meta` or `store=values`.
+- `read_charter` — published snapshot as `{ meta, values }`:
+  - **meta:** `title`, `description`, `genre`, `lang`, `visibility` (book cover; not inside `values`)
+  - **values:** steps 2–5 (limits, tags, rules, world); resolved with registry defaults
+- `update_charter` (Master):
+  - meta fields → **top-level args** (`title`, `description`, `genre`, `lang`, `visibility`)
+  - values → JSON string arg `values` with **only** `store=values` ids from `charter_schema`
+  - Never put `description` / other meta into `values`. Preview first, then `confirm: true`.
 
 ### Chapters
 
@@ -73,7 +84,7 @@ Match the Charter. Do not contradict recent turns or lore the user can see.
 
 ## Writes need confirm
 
-`submit_turn`, `edit_turn`, `add_lore`, `update_charter`, `create_book`:
+`submit_turn`, `edit_turn`, `add_lore`, `update_charter`, `create_book`, `choose_challenge`:
 
 1. Call **without** `confirm` (or not true). Show the preview to the user.
 2. Call again with `confirm: true` only after they clearly agree (“submit”, “confirm”, “create”, “publish”).
@@ -83,7 +94,7 @@ Match the Charter. Do not contradict recent turns or lore the user can see.
 `chapterFinal: true` only if they asked to end the chapter.
 `edit_turn` needs `turnId` from `list_turns`, not the order number. Only if line says `editable`.
 
-Before `update_charter`, call `charter_schema`. Send only those field ids/options.
+Before `update_charter`, call `charter_schema`. Meta → top-level args; `values` JSON → only `store=values`.
 `add_lore.type` / `access` and `create_book.genre` / `lang` / `visibility` — only values in that tool’s description.
 
 ## Who may write
