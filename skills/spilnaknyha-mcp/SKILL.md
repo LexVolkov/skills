@@ -1,7 +1,7 @@
 ---
 name: spilnaknyha-mcp
 description: >-
-  Write and read Spilna Knyha (spilnaknyha.pp.ua) via the public MCP:
+  Write and read Spilna Knyha (spilnaknyha.com) via the public MCP:
   books, members, turns, chapters, charter, lore. Use when the user
   mentions spilnaknyha, spilnaknyha-mcp, /mcp, a shared book turn,
   lore card, charter, or chapter boundaries.
@@ -10,7 +10,7 @@ license: MIT
 
 # Spilna Knyha MCP
 
-Remote MCP only. Endpoint: `https://spilnaknyha.pp.ua/api/mcp/http` (not `/mcp`).
+Remote MCP only. Endpoint: `https://spilnaknyha.com/api/mcp/http` (not `/mcp`).
 First call opens the site — the user taps Authorize. Do not invent a local stdio setup.
 Install skill: `npx skills add LexVolkov/skills --skill spilnaknyha-mcp`.
 
