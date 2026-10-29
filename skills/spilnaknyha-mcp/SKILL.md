@@ -20,6 +20,10 @@ Book, Turn (fragment), Chapter, Charter, Lore card.
 Roles (book hierarchy, not platform admin): **Author** → **Editor** → **Manager** → **Deputy** → **Master**.
 Codes: `author` | `editor` | `manager` | `deputy` | `master`. Master = book owner. Do not rename them.
 
+## Ids
+
+Every id argument is `<entity>Id`: `storyId` (book), `turnId` (fragment), `loreId` (lore card). Lists print the same key (`storyId=…`, `turnId=…`, `loreId=…`); copy it into the next call as is. One exception: challenge deal cards use `cardId` from `get_challenge` → `choose_challenge`.
+
 ## Tools (18)
 
 Read: `list_my_books`, `get_book`, `list_members`, `read_charter`, `list_chapters`, `charter_schema`, `list_turns`, `get_turns`, `list_lore`, `get_lore`.
@@ -32,7 +36,7 @@ Session: `logout`.
 1. `list_my_books` — which books, whose turn.
 2. `get_book` — status, queue, your uid, `allowEdit`, `lastClosedTurnOrder`, turn/chapter counts, challenge mode. **Not** charter cover (title/description/genre/lang/visibility) — that is `read_charter` → `meta`.
 3. `list_members` — map `authorUid` → `@handle`, displayName, **role**, muted/banned/shadow, turnCount, «ви».
-4. Before writing: `read_charter`, `list_chapters`, `list_turns` (index) + `get_turns` (text), `list_lore` / `get_lore`.
+4. Before writing: `read_charter`, `list_chapters`, `list_turns` (index) + `get_turns` (text), `list_lore` / `get_lore` (`loreId`).
 
 ### Charter
 
@@ -52,7 +56,7 @@ Then load text with `get_turns`: `fromOrder=<fromOrder+1>` and `toOrder=<toOrder
 
 ### Turns
 
-- **`list_turns`** — index only: `#order`, `turnId`, `authorUid`, `· ви`, `· editable` / `· read-only`, **N символів**; in challenge mode also `· challenge: <title>` and a `Challenge: <explanation>` line. No body text.
+- **`list_turns`** — index only, one line per fragment: `#24 turnId=… (authorUid=…)`, `· ви`, `· editable` / `· read-only`, **N символів**; in challenge mode also `· challenge: <title>` and a `Challenge: <explanation>` line. No body text.
 - **`get_turns`** — full text. Need at least one selector (union if several). Max **100** fragments per call.
   - `turnId` / `turnIds` (comma-separated)
   - `order` / `orders` — list or ranges: `24,25` or `24-26,30`
@@ -78,7 +82,7 @@ There is no hint in MCP: the site's "book-context hint" is not available here an
 ### Lore
 
 `list_lore`: optional `type` = `character` | `location` | `artifact` | `term` | `note`.
-`afterOrder=0` then page with `afterOrder=<last #>` (sorted by createdAt). `get_lore` for one card.
+`afterOrder=0` then page with `afterOrder=<last #>` (sorted by createdAt). Each line carries `loreId=…`; `get_lore` takes that `loreId` (`cardId` is a legacy alias and still works).
 
 Match the Charter. Do not contradict recent turns or lore the user can see.
 
