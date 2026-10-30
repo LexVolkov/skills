@@ -19,6 +19,7 @@ One skill:
 npx skills add LexVolkov/skills --skill safe-architecture-audit
 npx skills add LexVolkov/skills --skill grill-me-softly
 npx skills add LexVolkov/skills --skill spilnaknyha-mcp
+npx skills add LexVolkov/skills --skill spilnaknyha-turn
 ```
 
 Or prompt:
@@ -49,6 +50,22 @@ npx skills add LexVolkov/skills --skill spilnaknyha-mcp
 ```
 
 Site: [spilnaknyha.pp.ua/mcp](https://spilnaknyha.pp.ua/mcp)
+
+---
+
+### spilnaknyha-turn
+
+**Write one turn that fits the book it joins** — language, tone, POV, voice, canon, and a hook for the next author.
+
+Runs a read-first ritual (Charter → lore → last three turns), builds a five-line voice card from the existing prose, enforces turn etiquette (length, one scene, no stolen moves), and blocks AI-slop cadence before submit. Ukrainian and Russian examples live in `references/anti-slop-uk.md`.
+
+Install:
+
+```bash
+npx skills add LexVolkov/skills --skill spilnaknyha-turn
+```
+
+Works with [`spilnaknyha-mcp`](#spilnaknyha-mcp) for tool calls and confirmations.
 
 ---
 
@@ -144,8 +161,11 @@ skills/
 ├── safe-architecture-audit/
 │   ├── SKILL.md
 │   └── references/
-└── spilnaknyha-mcp/
-    └── SKILL.md
+├── spilnaknyha-mcp/
+│   └── SKILL.md
+└── spilnaknyha-turn/
+    ├── SKILL.md
+    └── references/
 ```
 
 ---
