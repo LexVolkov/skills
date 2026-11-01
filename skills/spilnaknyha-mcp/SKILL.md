@@ -83,6 +83,18 @@ There is no hint in MCP: the site's "book-context hint" is not available here an
 
 `list_lore`: optional `type` = `character` | `location` | `artifact` | `term` | `note`.
 `afterOrder=0` then page with `afterOrder=<last #>` (sorted by createdAt). Each line carries `loreId=…`; `get_lore` takes that `loreId` (`cardId` is a legacy alias and still works).
+`get_lore` prints the card fields and a `Посилання:` block with the saved links.
+
+`add_lore` can attach up to **10 previews** — pass `links` as a JSON string arg:
+
+```
+links: '[{"url":"https://cdn.example.com/keep.jpg","title":"Вежа"}, "https://youtu.be/dQw4w9WgXcQ"]'
+```
+
+- element is `{url, title}` or a bare URL string; `title` is an optional short caption;
+- `http`/`https` only; the server rejects an 11th link (`lore_link_limit`), a broken URL (`lore_link_invalid`) and duplicates (`lore_link_duplicate`);
+- the site shows a preview for images (`.jpg/.png/.webp/.gif/.avif`), YouTube (`watch`, `shorts`, `youtu.be`) and Pinterest pins (`pinterest.com/pin/<id>`); anything else becomes a plain link row;
+- links are set only when the card is created — there is no `update_lore` in MCP, so adding links to an existing card means the website.
 
 Match the Charter. Do not contradict recent turns or lore the user can see.
 
@@ -112,5 +124,5 @@ Before `update_charter`, call `charter_schema`. Meta → top-level args; `values
 
 ## Not in MCP
 
-No turn digest, no chapter summaries, no edit/delete lore, no invites, no pause, no challenge hint (book-context suggestion).
+No turn digest, no chapter summaries, no edit/delete lore (links included), no invites, no pause, no challenge hint (book-context suggestion).
 If asked, say the tool is not on MCP and use the website.
